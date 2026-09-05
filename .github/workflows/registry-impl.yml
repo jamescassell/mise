@@ -289,6 +289,9 @@ jobs:
         id: retry
         if: steps.test-tools.outputs.failed_tools != ''
         run: |
+          echo "Waiting 30s before retrying failed tools: ${{ steps.test-tools.outputs.failed_tools }}"
+          sleep 30
+
           summary_dir="$RUNNER_TEMP/test-tool-retry-${{ matrix.tranche }}"
           rm -rf "$summary_dir"
           mkdir -p "$summary_dir"
